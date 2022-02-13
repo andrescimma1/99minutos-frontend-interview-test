@@ -5,6 +5,8 @@ body {
 	padding: 0;
 	margin: 0;
 	font-family: "Roboto", sans-serif;
+	background-color: #0e1318;
+	color: white;
 }
 
 a {
@@ -20,5 +22,10 @@ div {
 	width: 100%;
 	height: 100%;
 	display: flex;
-	align-items: center;
+}
+
+img {
+	width: 670px;
+	height: 250px;
+	border-radius: 50px;
 }
