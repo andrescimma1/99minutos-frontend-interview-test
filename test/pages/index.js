@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import * as React from "react";
 import Container from "@material-ui/core/Container";
-import { Box, Grid } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
@@ -36,51 +36,42 @@ export default function Home({ launches }) {
               <>
                 {clicked !== index ? (
                   <>
-                    <Box
+                    <Button
                       onClick={() => {
-                        setClicked(index);
                         setSelected(launches[index]);
+                        setClicked(index);
                       }}
                       sx={{
                         width: 300,
                         height: 30,
                         border: "2px solid black",
-                        "&:hover": {
-                          cursor: "pointer",
-                          backgroundColor: "grey",
-                          opacity: [0.9, 0.8, 0.7],
-                        },
+                        backgroundColor: "#5d5d5d",
                         mt: "2px",
                         borderRadius: "5px",
                       }}
-                      component="span"
                     >
                       <h3 className={styles.name}>{mission.mission_name}</h3>
-                    </Box>
+                    </Button>
                   </>
                 ) : (
-                  <Box
-                    sx={{
-                      width: 300,
-                      height: 30,
-                      border: "2px solid black",
-                      backgroundColor: "#5d5d5d",
-                      mt: "2px",
-                      borderRadius: "5px",
-                    }}
-                    component="span"
-                  >
+                  <Button disabled>
                     <h3 className={styles.name}>{mission.mission_name}</h3>
-                  </Box>
+                  </Button>
                 )}
               </>
             );
           })}
         </Grid>
         <Grid className={styles.description} item xs={8}>
-          <img src={!selected.ships[0] ? "" : selected.ships[0].image} />
+          <img
+            src={
+              !selected.ships[0]
+                ? "https://ujew.com.ua/assets/img/not_found.jpg"
+                : selected.ships[0].image
+            }
+          />
           <h1>{selected.mission_name}</h1>
-          <h2>{selected.launch_site.site_name_long}</h2>
+          <h2 className={styles.info}>{selected.launch_site.site_name_long}</h2>
         </Grid>
       </Grid>
     </div>

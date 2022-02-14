@@ -25,7 +25,8 @@ div {
 }
 
 img {
+	margin-top: 10px;
 	width: 670px;
-	height: 250px;
+	height: 300px;
 	border-radius: 50px;
 }
