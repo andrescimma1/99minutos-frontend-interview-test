@@ -1,7 +1,7 @@
 .container {
   padding: 0 !important;
   width: 1100px;
-  height: 550px;
+  height: 600px;
   border: 2px solid black;
   border-radius: 5px;
   margin: auto;
@@ -137,6 +137,10 @@
 .info {
   margin: 0 auto;
   color: #dfdfdf;
+}
+
+.mission_name {
+  margin: 1px;
 }
 
 @media (max-width: 600px) {

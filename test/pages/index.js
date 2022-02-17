@@ -6,6 +6,17 @@ import Container from "@material-ui/core/Container";
 import { Button, Grid } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import { styled } from "@material-ui/styles";
+import Link from "next/link";
+
+const ColorButton = styled(Button)(({ theme }) => ({
+  backgroundColor: "#0e1318",
+  margin: "2px 0 2px 0",
+
+  "&:hover": {
+    backgroundColor: " #154360 ",
+  },
+}));
 
 export default function Home({ launches }) {
   const [clicked, setClicked] = useState(0);
@@ -36,7 +47,7 @@ export default function Home({ launches }) {
               <>
                 {clicked !== index ? (
                   <>
-                    <Button
+                    <ColorButton
                       onClick={() => {
                         setSelected(launches[index]);
                         setClicked(index);
@@ -46,12 +57,13 @@ export default function Home({ launches }) {
                         height: 30,
                         border: "2px solid black",
                         backgroundColor: "#5d5d5d",
-                        mt: "2px",
                         borderRadius: "5px",
+                        bgcolor: "green",
                       }}
+                      variant="contained"
                     >
                       <h3 className={styles.name}>{mission.mission_name}</h3>
-                    </Button>
+                    </ColorButton>
                   </>
                 ) : (
                   <Button disabled>
@@ -65,13 +77,16 @@ export default function Home({ launches }) {
         <Grid className={styles.description} item xs={8}>
           <img
             src={
-              !selected.ships[0]
+              !selected.links.flickr_images[0]
                 ? "https://ujew.com.ua/assets/img/not_found.jpg"
-                : selected.ships[0].image
+                : selected.links.flickr_images[0]
             }
           />
-          <h1>{selected.mission_name}</h1>
-          <h2 className={styles.info}>{selected.launch_site.site_name_long}</h2>
+          <h1 className={styles.mission_name}>{selected.mission_name}</h1>
+          <h5 className={styles.info}>{selected.details}</h5>
+          <Button variant="contained">
+            <Link href={selected.links.video_link}>Show more..</Link>
+          </Button>
         </Grid>
       </Grid>
     </div>
@@ -96,12 +111,9 @@ export async function getStaticProps() {
           links {
             article_link
             video_link
+            flickr_images
           }
-          ships {
-            name
-            home_port
-            image
-          }
+          details
         }
       }
     `,
