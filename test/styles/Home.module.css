@@ -123,21 +123,30 @@
   text-align: center;
   margin: 2px 0;
   color: #dfdfdf;
+  width: 100%;
 }
 
 .description {
   flex-direction: column;
   align-items: center;
   font-size: 1.2rem;
+  margin: 5px 0;
 }
 
 .info {
   margin: 0 auto;
+  padding-bottom: 20px;
   color: #dfdfdf;
 }
 
 .mission_name {
-  margin: 1px;
+  margin: 10px 0;
+}
+
+.IoIosRocket {
+  display: flex;
+  float: left;
+  max-width: 60px;
 }
 
 @media (max-width: 600px) {

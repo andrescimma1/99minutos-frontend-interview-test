@@ -10,23 +10,34 @@ import { styled } from "@material-ui/styles";
 import Link from "next/link";
 import { Typography } from "@mui/material";
 import { IoIosRocket } from "react-icons/Io";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
-const ColorButton = styled(Button)(({ theme }) => ({
+const CustomContainer = styled(Container)(({ theme }) => ({
   backgroundColor: "#49206d ",
-  margin: "2px 0 2px 0",
+  margin: "5px 0 5px 0",
   width: "300px",
-  height: "200px",
+  minHeight: "60px",
+  borderRadius: "5px",
+  display: "flex",
+  padding: "0 5px",
+  alignItems: "center",
 
   "&:hover": {
     backgroundColor: "#301548  ",
+    cursor: "pointer",
   },
 }));
 
-const ColorButton2 = styled(Button)(({ theme }) => ({
+const CustomContainer2 = styled(Container)(({ theme }) => ({
   backgroundColor: "#1e0c2f ",
-  margin: "2px 0 2px 0",
+  margin: "5px 0 5px 0",
   width: "300px",
-  height: "200px",
+  minHeight: "60px",
+  borderRadius: "5px",
+  display: "flex",
+  padding: "0 5px",
+  alignItems: "center",
+
   "&:hover": {
     backgroundColor: "#1e0c2f  ",
     cursor: "inherit",
@@ -69,20 +80,13 @@ export default function Home({ launches }) {
             return (
               <>
                 {clicked !== index ? (
-                  <ColorButton
+                  <CustomContainer
                     onClick={() => {
                       setSelected(launches[index]);
                       setClicked(index);
                     }}
-                    sx={{
-                      width: 300,
-                      height: 30,
-                      border: "2px solid black",
-                      borderRadius: "5px",
-                    }}
-                    variant="contained"
                   >
-                    <IoIosRocket size={32} color="white" />
+                    <IoIosRocket size={60} color="white" />
                     <Typography
                       variant="h6"
                       fontSize="15px"
@@ -90,21 +94,31 @@ export default function Home({ launches }) {
                     >
                       {mission.mission_name}
                     </Typography>
-                  </ColorButton>
+                    <Typography
+                      variant="h6"
+                      fontSize="10px"
+                      sx={{
+                        textAlign: "right",
+                        float: "right",
+                        position: "relative",
+                        top: "22px",
+                        margin: "0 auto",
+                        width: "100px",
+                        height: "20px",
+                        color: "#c4c4c4",
+                      }}
+                    >
+                      {mission.launch_date_local.slice(0, -15)}
+                    </Typography>
+                  </CustomContainer>
                 ) : (
-                  <ColorButton2
+                  <CustomContainer2
                     onClick={() => {
                       setSelected(launches[index]);
                       setClicked(index);
                     }}
-                    sx={{
-                      width: 300,
-                      height: 30,
-                      border: "2px solid black",
-                      borderRadius: "5px",
-                    }}
                   >
-                    <IoIosRocket size={32} color="white" />
+                    <IoIosRocket size={60} color="white" />
                     <Typography
                       variant="h6"
                       fontSize="15px"
@@ -112,7 +126,23 @@ export default function Home({ launches }) {
                     >
                       {mission.mission_name}
                     </Typography>
-                  </ColorButton2>
+                    <Typography
+                      variant="h6"
+                      fontSize="10px"
+                      sx={{
+                        textAlign: "right",
+                        float: "right",
+                        position: "relative",
+                        top: "22px",
+                        margin: "0 auto",
+                        width: "100px",
+                        height: "20px",
+                        color: "#c4c4c4",
+                      }}
+                    >
+                      {mission.launch_date_local.slice(0, -15)}
+                    </Typography>
+                  </CustomContainer2>
                 )}
               </>
             );
@@ -122,7 +152,7 @@ export default function Home({ launches }) {
           <img
             src={
               !selected.links.flickr_images[0]
-                ? "https://ujew.com.ua/assets/img/not_found.jpg"
+                ? "https://i.gifer.com/7Bk2.gif"
                 : selected.links.flickr_images[0]
             }
           />
@@ -134,7 +164,7 @@ export default function Home({ launches }) {
             {selected.mission_name}
           </Typography>
           <Typography variant="h5" className={styles.info}>
-            {selected.details}
+            {selected.details || "No details..."}
           </Typography>
           <Button variant="contained">
             <Link href={selected.links.video_link}>See more..</Link>
